@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+void MergeSort(int n, int array[]);
+void Merge(int left, int right, int leftArray[], int rifhtArray[],int array[]);
+void MergeSort(int n, int array[])
+{
+	if (n>1)
+	{
+		int h = n / 2;
+		int m = n - h;
+		int* LeftArray = new int[h];
+		int* RightArray = new int[m];
+		for (int i = 0; i < h; i++)
+			LeftArray[i] = array[i];
+
+		for (int i = h; i < h + m; i++)
+			RightArray[i-h] = array[i];
+
+		MergeSort(h, LeftArray);
+		MergeSort(m, RightArray);
+		Merge(h,m,LeftArray,RightArray,array);
+	}
+}
+void Merge(int h, int m, int leftArray[], int rightArray[], int array[])
+{
+	int i = 0, j = 0, k = 0;
+	while (i <h &&j<m)
+	{
+		if (leftArray[i] > rightArray[j])
+			array[k++] = leftArray[i++];
+		else
+			array[k++] = rightArray[j++];
+	}
+
+	if (i >= h)
+	{
+		while (k < h + m)
+		{
+			array[k++] = rightArray[j++];
+		}
+	}
+	else
+	{
+		while (k < h + m)
+		{
+			array[k++] = leftArray[i++];
+		}
+	}
+}
+int main()
+{
+	int num;
+	cin >>num;
+	int* arr = new int[num]();
+
+	for (int i = 0; i < num; i++)
+		cin >> arr[i];
+
+
+	MergeSort(num, arr);
+
+	for (int i = 0; i < num; i++)
+		cout << arr[i] << " ";
+	cout << "\n";
+
+
+	return 0;
+}
