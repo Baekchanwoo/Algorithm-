@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+void swap(int h, int m, int arr[])
+{
+	int temp = arr[h];
+	arr[h] = arr[m];
+	arr[m] = temp;
+}
+int partition(int h, int m, int arr[])
+{
+	int pivot = arr[h];
+	int pivotLoc = h;
+	for (int i = h + 1; i < m + 1; i++)
+	{
+		if (arr[i] < pivot)
+		{
+			swap(++pivotLoc, i, arr);
+		}
+	}
+	swap(h, pivotLoc, arr);
+	return pivotLoc;
+}
+void QuickSort(int h, int m, int arr[])
+{
+	if (h < m)
+	{
+		int pivot = partition(h, m, arr);
+		QuickSort(h, pivot - 1, arr);
+		QuickSort(pivot + 1, m, arr);
+	}
+}
+int main()
+{
+	int num;
+	cin >> num;
+	int* arr = new int[num]();
+	for (int i = 0; i < num; i++)
+		cin >> arr[i];
+
+	for (int i = 0; i < num; i++)
+		cout << arr[i] << " ";
+	cout << "\n";
+
+	QuickSort(0, num - 1, arr);
+
+	for (int i = 0; i < num; i++)
+		cout << arr[i] << " ";
+	cout << "\n";
+
+	return 0;
+}
