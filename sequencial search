@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+int sequencialSearch(int array[], int len,int x) {
+	int search = -1;
+	int n = 0;
+	while (search == -1 && n <= len-1) {
+		if (array[n] == x) {
+			search = n;
+		}
+		n++;
+	}
+	return search;
+}
+
+int main()
+{
+	int arrays[10];
+	for (int i = 0; i < 10; i++) {
+		cin >> arrays[i];
+	}
+	cout<<sequencialSearch(arrays, 10, 3)<<"\n";
+
+
+	return 0;
+}
